@@ -96,7 +96,7 @@ func (parser *Parser) Parse(sentence string) (Fix, error) {
 		fix.Speed = findSpeed(fields[7])
 		fix.Heading = findHeading(fields[8])
 		date := findDate(fields[9])
-		fix.Time = fix.Time.AddDate(date.Year(), int(date.Month()), date.Day())
+		fix.Time = time.Date(date.Year(), date.Month(), date.Day(), fix.Time.Hour(), fix.Time.Minute(), fix.Time.Second(), 0, time.UTC)
 
 		return fix, nil
 	}
